@@ -6,7 +6,8 @@
     "demo": "tsx src/index.ts briefs/sample-brief.md",
     "demo:sample": "USE_SAMPLE_RUN=true tsx src/index.ts briefs/sample-brief.md",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "dev": "npm run dev --prefix web"
   },
   "dependencies": {
     "dotenv": "^17.4.2",

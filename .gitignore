@@ -3,3 +3,5 @@ node_modules/
 runs/run-*/
 dist/
 *.js.map
+docs/interview-prep.md
+web/.next/

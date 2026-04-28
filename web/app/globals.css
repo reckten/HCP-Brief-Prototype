@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0E2044;
+  --ink2: #1B3461;
+  --olive: #6E7E28;
+  --olive2: #8FA832;
+  --orange: #C85C1E;
+  --rubine: #CE0058;
+  --off: #F4F6FA;
+  --light: #E8ECF2;
+  --mid: #8A95A8;
+  --dark: #1A2235;
+}
+
+body {
+  background-color: var(--off);
+  color: var(--dark);
+}
+
+.font-brand {
+  font-family: "Nunito", "Century Gothic", Futura, sans-serif;
+}
+
+.stage-card-pending  { border-color: var(--light); }
+.stage-card-running  { border-color: var(--olive2); }
+.stage-card-success  { border-color: var(--ink2); }
+
+@keyframes pulse-olive {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.pulse-olive { animation: pulse-olive 1.4s ease-in-out infinite; }

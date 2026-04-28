@@ -51,19 +51,26 @@ export async function runPipeline(briefContent: string, runId: string): Promise<
   s3.finish("success", `Delivery package generated (${deliveryPackage.length} chars)`);
   await writeFile(path.join(runDir, "delivery-package.md"), deliveryPackage);
 
-  // Stage 4: QA
-  console.log("Stage 4/6 - QA Test Plan...");
+  // Stages 4 + 5: QA and Compliance run in parallel — both depend only on requirements + deliveryPackage
+  console.log("Stages 4+5/6 - QA and Compliance (parallel)...");
   const s4 = tracer.startStage(runId, "qa");
-  const testPlan = await runQaAgent(requirements, deliveryPackage);
-  s4.finish("success", `Test plan generated (${testPlan.length} chars)`);
-  await writeFile(path.join(runDir, "test-plan.md"), testPlan);
-
-  // Stage 5: Compliance
-  console.log("Stage 5/6 - Compliance Review...");
   const s5 = tracer.startStage(runId, "compliance");
-  const riskReview = await runComplianceAgent(requirements, deliveryPackage);
-  s5.finish("success", `Risk review generated (${riskReview.length} chars)`);
-  await writeFile(path.join(runDir, "risk-review.md"), riskReview);
+
+  const [testPlan, riskReview] = await Promise.all([
+    runQaAgent(requirements, deliveryPackage).then((result) => {
+      s4.finish("success", `Test plan generated (${result.length} chars)`);
+      return result;
+    }),
+    runComplianceAgent(requirements, deliveryPackage).then((result) => {
+      s5.finish("success", `Risk review generated (${result.length} chars)`);
+      return result;
+    }),
+  ]);
+
+  await Promise.all([
+    writeFile(path.join(runDir, "test-plan.md"), testPlan),
+    writeFile(path.join(runDir, "risk-review.md"), riskReview),
+  ]);
 
   // Stage 6: Evaluator
   console.log("Stage 6/6 - AgentOps Evaluation...");
