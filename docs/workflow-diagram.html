@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relevate Health · HCP Brief Workflow Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:    #0E2044;
+  --ink2:   #1B3461;
+  --olive:  #6E7E28;
+  --olive2: #8FA832;
+  --orange: #C85C1E;
+  --rubine: #CE0058;
+  --lime:   #95C11F;
+  --dark:   #1A2235;
+  --mid:    #8A95A8;
+  --light:  #E8ECF2;
+  --off:    #F4F6FA;
+  --white:  #FFFFFF;
+}
+body{
+  font-family:'Inter',Helvetica,sans-serif;
+  background:var(--off);
+  color:var(--dark);
+  min-height:100vh;
+}
+h1,h2,h3,.brand,.eyebrow,.stage-num,.card-label,.tp-head,.sec-eye{
+  font-family:'Nunito','Century Gothic',Futura,sans-serif;
+}
+
+/* ── Nav ── */
+.nav{
+  background:var(--ink);
+  height:58px;padding:0 2.5rem;
+  display:flex;align-items:center;gap:0.75rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-circles{display:flex;gap:4px;align-items:center}
+.nc{width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,0.5)}
+.nc.fill{background:var(--olive2);border-color:var(--olive2)}
+.brand{color:var(--white);font-size:0.95rem;font-weight:800;letter-spacing:-0.01em}
+.nav-div{width:1px;height:18px;background:rgba(255,255,255,0.15);margin:0 0.25rem}
+.nav-sub{color:rgba(255,255,255,0.4);font-size:0.75rem}
+
+/* ── Hero ── */
+.hero{
+  background:linear-gradient(140deg, var(--ink) 0%, #102860 55%, #0B1A40 100%);
+  padding:3rem 2.5rem 2.75rem;
+  position:relative;overflow:hidden;
+}
+.deco1{position:absolute;right:-70px;top:-70px;width:340px;height:340px;border-radius:50%;border:50px solid rgba(255,255,255,0.03);pointer-events:none}
+.deco2{position:absolute;right:80px;top:50px;width:180px;height:180px;border-radius:50%;border:28px solid rgba(110,126,40,0.1);pointer-events:none}
+.deco3{position:absolute;left:-40px;bottom:-40px;width:200px;height:200px;border-radius:50%;border:35px solid rgba(200,92,30,0.06);pointer-events:none}
+.hero-inner{max-width:1060px;margin:0 auto;position:relative}
+.eyebrow{
+  font-size:0.65rem;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:0.6rem;
+}
+.hero-title{
+  font-size:1.8rem;font-weight:900;
+  color:var(--white);line-height:1.2;
+  letter-spacing:-0.02em;margin-bottom:0.5rem;
+}
+.hero-sub{font-size:0.88rem;color:rgba(255,255,255,0.5);max-width:540px}
+
+/* ── Page ── */
+.page{max-width:1060px;margin:0 auto;padding:2.5rem 2.5rem 5rem}
+
+/* ── Section label ── */
+.sec-label{
+  font-size:0.62rem;font-weight:700;
+  letter-spacing:0.13em;text-transform:uppercase;
+  color:var(--mid);margin-bottom:0.85rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--light)}
+
+/* ── Input node ── */
+.input-row{display:flex;justify-content:center;margin-bottom:0}
+.input-node{
+  background:var(--ink);
+  border-radius:12px;
+  padding:1rem 1.75rem;
+  display:flex;align-items:center;gap:1rem;
+  box-shadow:0 4px 20px rgba(14,32,68,0.28);
+  min-width:300px;
+}
+.in-icon{
+  width:42px;height:42px;border-radius:9px;
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+}
+.in-eye{font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:0.2rem}
+.in-name{font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:800;color:var(--white)}
+.in-sub{font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:0.1rem}
+
+/* ── Arrow ── */
+.arrow-wrap{display:flex;justify-content:center;height:40px;align-items:center;position:relative}
+.arrow-wrap::before{content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);width:2px;height:26px;background:var(--light)}
+.arrow-wrap::after{content:'▼';position:absolute;bottom:2px;font-size:0.6rem;color:var(--mid)}
+
+/* ── Pipeline ── */
+.pipeline{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:0;
+  position:relative;
+}
+/* connecting line behind stages */
+.pipeline::before{
+  content:'';
+  position:absolute;
+  top:24px;left:8%;right:8%;
+  height:2px;
+  background:var(--light);
+  z-index:0;
+}
+.stage-col{
+  display:flex;flex-direction:column;
+  align-items:center;
+  position:relative;z-index:1;
+}
+.stage-box{
+  background:var(--white);
+  border:1.5px solid var(--light);
+  border-radius:10px;
+  padding:1.1rem 0.75rem 1rem;
+  width:calc(100% - 12px);
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  transition:border-color 0.15s,box-shadow 0.15s;
+  cursor:default;
+}
+.stage-box:hover{
+  border-color:var(--ink2);
+  box-shadow:0 4px 16px rgba(14,32,68,0.12);
+}
+.stage-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:7px;
+  background:var(--ink);
+  color:var(--white);
+  font-size:0.65rem;font-weight:900;
+  letter-spacing:0.03em;
+  margin-bottom:0.6rem;
+}
+.stage-title{font-size:0.78rem;font-weight:800;color:var(--ink);line-height:1.25;margin-bottom:0.3rem}
+.stage-desc{font-size:0.65rem;color:var(--mid);line-height:1.45}
+
+/* ── Artifact arrows ── */
+.artifact-arrows{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  height:32px;
+}
+.art-arrow{
+  display:flex;justify-content:center;align-items:flex-end;
+  position:relative;
+}
+.art-arrow::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:22px;background:var(--light)}
+.art-arrow::after{content:'▼';position:absolute;bottom:0;font-size:0.55rem;color:var(--mid)}
+
+/* ── Artifacts ── */
+.artifacts{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:6px;
+  margin-bottom:2.5rem;
+}
+.artifact-pill{
+  background:var(--white);
+  border:1px solid var(--light);
+  border-radius:7px;
+  padding:0.55rem 0.65rem;
+  text-align:center;
+}
+.artifact-pill.is-json{border-top:3px solid var(--olive2)}
+.artifact-pill.is-md  {border-top:3px solid var(--ink2)}
+.artifact-pill.is-eval{border-top:3px solid var(--orange)}
+.ap-name{display:block;font-family:'Nunito',sans-serif;font-size:0.67rem;font-weight:800;color:var(--ink);margin-bottom:0.15rem;line-height:1.3}
+.ap-type{display:block;font-size:0.6rem;color:var(--mid)}
+
+/* ── AgentOps band ── */
+.ops-band{
+  background:var(--ink);
+  background:linear-gradient(135deg,var(--ink) 0%,#102860 100%);
+  border-radius:12px;
+  padding:1.25rem 2rem;
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;
+  align-items:center;
+  gap:1rem;
+  box-shadow:0 4px 20px rgba(14,32,68,0.22);
+  margin-bottom:2rem;
+  position:relative;overflow:hidden;
+}
+.ops-band::after{
+  content:'';position:absolute;right:-50px;top:-50px;
+  width:200px;height:200px;border-radius:50%;
+  border:35px solid rgba(110,126,40,0.08);
+}
+.ops-item{text-align:center;position:relative}
+.ops-icon{font-size:1.05rem;margin-bottom:0.25rem}
+.ops-name{display:block;font-family:'Nunito',sans-serif;font-size:0.72rem;font-weight:800;color:var(--white)}
+.ops-sub{display:block;font-size:0.6rem;color:rgba(255,255,255,0.4);margin-top:1px}
+.ops-div{width:1px;height:40px;background:rgba(255,255,255,0.1);justify-self:center}
+.ops-center{text-align:center}
+.ops-eye{font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:0.25rem}
+.ops-main{font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:900;color:var(--white)}
+
+/* ── Outputs ── */
+.outputs-row{
+  background:var(--white);
+  border:1.5px solid var(--olive2);
+  border-radius:12px;
+  padding:1.1rem 2rem;
+  display:flex;align-items:center;justify-content:center;
+  gap:0;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  flex-wrap:wrap;
+  margin-bottom:2.5rem;
+}
+.out-item{display:flex;flex-direction:column;align-items:center;padding:0 1.75rem}
+.out-icon{font-size:1.25rem;margin-bottom:0.25rem}
+.out-name{font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;color:var(--ink)}
+.out-type{font-size:0.62rem;color:var(--mid);margin-top:1px}
+.out-div{width:1px;height:40px;background:var(--light)}
+
+/* ── Legend ── */
+.legend{
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:1.5rem;margin-bottom:3rem;
+}
+.leg-item{display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;color:var(--mid)}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* ── Talking points ── */
+.tp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.tp-card{
+  background:var(--white);
+  border:1px solid var(--light);
+  border-radius:10px;
+  padding:1.1rem 1.25rem;
+  border-top:3px solid var(--ink2);
+  box-shadow:0 1px 4px rgba(0,0,0,0.04);
+}
+.tp-card.orange{border-top-color:var(--orange)}
+.tp-card.olive {border-top-color:var(--olive2)}
+.tp-num{font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:0.35rem}
+.tp-head{font-size:0.84rem;font-weight:800;color:var(--ink);margin-bottom:0.4rem}
+.tp-body{font-size:0.76rem;color:#4B5563;line-height:1.65}
+
+/* ── Footer ── */
+.footer{
+  background:var(--ink);
+  padding:1.25rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.footer-brand{font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;color:var(--white);display:flex;align-items:center;gap:0.5rem}
+.footer-dot{width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.footer-disc{font-size:0.68rem;color:rgba(255,255,255,0.3)}
+
+@media(max-width:900px){
+  .pipeline,.artifact-arrows,.artifacts{grid-template-columns:repeat(3,1fr)}
+  .ops-band{grid-template-columns:1fr 1fr;gap:1rem}
+  .ops-div{display:none}
+  .tp-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-circles">
+    <div class="nc fill"></div>
+    <div class="nc"></div>
+    <div class="nc"></div>
+  </div>
+  <span class="brand">Relevate Health</span>
+  <div class="nav-div"></div>
+  <span class="nav-sub">HCP Brief Workflow — Architecture</span>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="deco1"></div>
+  <div class="deco2"></div>
+  <div class="deco3"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Agentic Workflow · Interview Prototype</div>
+    <div class="hero-title">One structured brief in.<br>Six agent stages. Eight reviewable artifacts out.</div>
+    <div class="hero-sub">A sequential AI pipeline that translates an HCP engagement brief into a complete, traceable, compliance-reviewed delivery package.</div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Input -->
+  <div class="sec-label">Input</div>
+  <div class="input-row">
+    <div class="input-node">
+      <div class="in-icon">📄</div>
+      <div>
+        <div class="in-eye">Input</div>
+        <div class="in-name">sample-brief.md</div>
+        <div class="in-sub">Structured HCP engagement brief from brand team</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"></div>
+
+  <!-- Pipeline -->
+  <div class="sec-label" style="margin-bottom:1rem">Agent Pipeline</div>
+  <div class="pipeline">
+    <div class="stage-col">
+      <div class="stage-box">
+        <div class="stage-num">01</div>
+        <div class="stage-title">Brief Intake</div>
+        <div class="stage-desc">Parse brief → extract objective, audience, channels, risks, blockers</div>
+      </div>
+    </div>
+    <div class="stage-col">
+      <div class="stage-box">
+        <div class="stage-num">02</div>
+        <div class="stage-title">Strategy Planner</div>
+        <div class="stage-desc">Convert requirements → phased plan with escalation points</div>
+      </div>
+    </div>
+    <div class="stage-col">
+      <div class="stage-box">
+        <div class="stage-num">03</div>
+        <div class="stage-title">Delivery Agent</div>
+        <div class="stage-desc">Build operational package — triggers, channel, format, notes</div>
+      </div>
+    </div>
+    <div class="stage-col">
+      <div class="stage-box">
+        <div class="stage-num">04</div>
+        <div class="stage-title">QA Agent</div>
+        <div class="stage-desc">Generate test cases — happy path, edge cases, adversarial</div>
+      </div>
+    </div>
+    <div class="stage-col">
+      <div class="stage-box">
+        <div class="stage-num">05</div>
+        <div class="stage-title">Compliance Review</div>
+        <div class="stage-desc">Flag risks — off-label, fair balance, data assumptions</div>
+      </div>
+    </div>
+    <div class="stage-col">
+      <div class="stage-box">
+        <div class="stage-num">06</div>
+        <div class="stage-title">Evaluator</div>
+        <div class="stage-desc">Score all outputs across five dimensions — honest, calibrated</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Artifact drop arrows -->
+  <div class="artifact-arrows">
+    <div class="art-arrow"></div>
+    <div class="art-arrow"></div>
+    <div class="art-arrow"></div>
+    <div class="art-arrow"></div>
+    <div class="art-arrow"></div>
+    <div class="art-arrow"></div>
+  </div>
+
+  <!-- Artifacts -->
+  <div class="artifacts">
+    <div class="artifact-pill is-json">
+      <span class="ap-name">requirements.json</span>
+      <span class="ap-type">Zod-validated JSON</span>
+    </div>
+    <div class="artifact-pill is-md">
+      <span class="ap-name">plan.md</span>
+      <span class="ap-type">Execution plan</span>
+    </div>
+    <div class="artifact-pill is-md">
+      <span class="ap-name">delivery-package.md</span>
+      <span class="ap-type">Operational handoff</span>
+    </div>
+    <div class="artifact-pill is-md">
+      <span class="ap-name">test-plan.md</span>
+      <span class="ap-type">18 test cases</span>
+    </div>
+    <div class="artifact-pill is-md">
+      <span class="ap-name">risk-review.md</span>
+      <span class="ap-type">Compliance memo</span>
+    </div>
+    <div class="artifact-pill is-eval">
+      <span class="ap-name">eval.json</span>
+      <span class="ap-type">Quality scores</span>
+    </div>
+  </div>
+
+  <!-- AgentOps band -->
+  <div class="sec-label">AgentOps Layer — runs under every stage</div>
+  <div class="ops-band">
+    <div class="ops-item">
+      <div class="ops-icon">⚡</div>
+      <span class="ops-name">trace.json</span>
+      <span class="ops-sub">Per-stage timing &amp; status</span>
+    </div>
+    <div class="ops-div"></div>
+    <div class="ops-item">
+      <div class="ops-icon">🔁</div>
+      <span class="ops-name">Retry Logic</span>
+      <span class="ops-sub">Auto-recover on failure</span>
+    </div>
+    <div class="ops-div"></div>
+    <div class="ops-center">
+      <div class="ops-eye">Observability · Recovery · Validation</div>
+      <div class="ops-main">AgentOps Layer</div>
+    </div>
+    <div class="ops-div"></div>
+    <div class="ops-item">
+      <div class="ops-icon">📋</div>
+      <span class="ops-name">Schema Validation</span>
+      <span class="ops-sub">Zod guards every output</span>
+    </div>
+    <div class="ops-div"></div>
+    <div class="ops-item">
+      <div class="ops-icon">🗂️</div>
+      <span class="ops-name">Run Isolation</span>
+      <span class="ops-sub">Unique ID per execution</span>
+    </div>
+  </div>
+
+  <!-- Final outputs -->
+  <div class="sec-label">Final Deliverables</div>
+  <div class="outputs-row">
+    <div class="out-item">
+      <div class="out-icon">🌐</div>
+      <div class="out-name">report.html</div>
+      <div class="out-type">VP-ready visual report</div>
+    </div>
+    <div class="out-div"></div>
+    <div class="out-item">
+      <div class="out-icon">📝</div>
+      <div class="out-name">summary.md</div>
+      <div class="out-type">Plain-English run summary</div>
+    </div>
+    <div class="out-div"></div>
+    <div class="out-item">
+      <div class="out-icon">🔍</div>
+      <div class="out-name">trace.json</div>
+      <div class="out-type">Full audit trail</div>
+    </div>
+    <div class="out-div"></div>
+    <div class="out-item">
+      <div class="out-icon">📁</div>
+      <div class="out-name">runs/&lt;run-id&gt;/</div>
+      <div class="out-type">All artifacts, isolated per run</div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--ink)"></div>Agent stage — scoped prompt + Claude API call</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--olive2)"></div>JSON artifact — Zod-validated schema</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--ink2);opacity:0.5"></div>Markdown artifact — human-readable output</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--orange)"></div>Evaluation output — calibrated quality score</div>
+  </div>
+
+  <!-- Talking points -->
+  <div class="sec-label">Demo Talking Points</div>
+  <div class="tp-grid">
+    <div class="tp-card">
+      <div class="tp-num">On the pipeline</div>
+      <div class="tp-head">One stage, one job</div>
+      <div class="tp-body">"Each agent has a single focused prompt. The intake agent doesn't plan. The planner doesn't write tests. That separation makes it easier to debug, swap, and explain — and mirrors how you'd build a real internal tool."</div>
+    </div>
+    <div class="tp-card orange">
+      <div class="tp-num">On observability</div>
+      <div class="tp-head">The AgentOps layer</div>
+      <div class="tp-body">"Every stage is timestamped in trace.json — start time, duration, retry count, status. In production that feeds a monitoring dashboard. Here it's a JSON file, but the discipline is identical: you can't improve what you can't observe."</div>
+    </div>
+    <div class="tp-card olive">
+      <div class="tp-num">On relevance</div>
+      <div class="tp-head">Connecting to Relevate</div>
+      <div class="tp-body">"This uses a fictional hypertension brief, but the workflow maps directly to a real technical brief — parse it, plan it, build the artifact, QA it, flag the risks, score it. The input changes. The discipline doesn't."</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-brand"><div class="footer-dot"></div>Relevate Health</div>
+  <div class="footer-disc">Fictional prototype · Interview demonstration only · All data illustrative and sanitized</div>
+</footer>
+
+</body>
+</html>

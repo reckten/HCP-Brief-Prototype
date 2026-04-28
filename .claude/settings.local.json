@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm test *)",
+      "Bash(node -e \"const r=require\\('./runs/sample-run/requirements.json'\\); console.log\\('requirements.json OK:', r.objective.slice\\(0,80\\)\\)\")",
+      "Bash(node -e \"const e=require\\('./runs/sample-run/eval.json'\\); console.log\\('eval.json OK: score='+e.overall_score, 'flags='+e.flags.length\\)\")",
+      "Bash(node -e \"const t=require\\('./runs/sample-run/trace.json'\\); console.log\\('trace.json OK: '+t.length+' stages,', t.map\\(s=>s.stage\\).join\\(' → '\\)\\)\")",
+      "Bash(npx tsx *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const d=require\\('/dev/stdin'\\); console.log\\('trace entries:', d.length, '| stages:', d.map\\(t=>t.stage\\).join\\(', '\\)\\)\")",
+      "Bash(node -e \"const d=require\\('/dev/stdin'\\); console.log\\('eval dims:', Object.keys\\(d\\).join\\(', '\\)\\)\")",
+      "Bash(xargs wc *)",
+      "Bash(node -p \"JSON.parse\\(require\\('fs'\\).readFileSync\\('runs/sample-run/trace.json','utf8'\\)\\).map\\(t=>t.stage+':'+t.status\\).join\\(', '\\)\")",
+      "Bash(node -p \"const e=JSON.parse\\(require\\('fs'\\).readFileSync\\('runs/sample-run/eval.json','utf8'\\)\\); 'score:'+e.overall_score+' flags:'+e.flags.length+' dims:'+Object.keys\\(e\\).join\\(','\\)\")",
+      "Bash(npm uninstall *)"
+    ]
+  }
+}

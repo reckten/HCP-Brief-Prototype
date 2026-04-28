@@ -1,0 +1,45 @@
+{
+  "objective": "Increase neurologist and primary-care familiarity with the diagnostic profile of Chronic Peripheral Signal Disruption (CPSD) and the role of NeuroPath as an educational reference at point of care.",
+  "audience": {
+    "specialty": ["Neurology", "Internal Medicine", "Family Medicine"],
+    "geography": ["Massachusetts", "New York", "New Jersey", "Connecticut", "Pennsylvania"],
+    "care_setting": ["outpatient clinic", "academic medical center", "multi-specialty group"],
+    "illustrative_codes": [
+      "[ILLUSTRATIVE] 2084N0400X (Neurology)",
+      "[ILLUSTRATIVE] 207R00000X (Internal Medicine)",
+      "[ILLUSTRATIVE] 207Q00000X (Family Medicine)",
+      "[ILLUSTRATIVE] G99.X-CPSD (placeholder CPSD analog)"
+    ]
+  },
+  "channels": ["EHR point-of-care", "on-demand CME"],
+  "content_type": "60-90s EHR sidebar education cards plus 8-12 minute on-demand CME video modules; peer-reviewed, neutral tone, fair-balance language required.",
+  "assumptions": [
+    "EHR vendor partnerships already in place for at least two major systems",
+    "CME accreditation partner is identified and contracted",
+    "Targeting data sourced from vendor HCP list, not internal PHI"
+  ],
+  "blockers": [
+    "Final CPSD diagnostic code mapping not yet locked by Medical Affairs",
+    "CME independence requirements limit branding density inside modules"
+  ],
+  "dependencies": [
+    "Medical Affairs sign-off on diagnostic positioning",
+    "MLR approval of all assets",
+    "EHR vendor configuration for sidebar placement",
+    "CME partner accreditation timeline"
+  ],
+  "open_questions": [
+    "Frequency cap for EHR card exposure per HCP per week is undefined",
+    "Opt-out mechanism for HCPs declining point-of-care education is not specified",
+    "Measurement plan: engagement-only vs. downstream behavior signals not decided",
+    "Which two EHR vendors are confirmed for soft launch?",
+    "Is the CPSD analog code stable enough to drive trigger logic, or will it shift mid-flight?"
+  ],
+  "risks": [
+    "Off-label drift if mechanism-of-action language strays into efficacy claims at point of care",
+    "Perceived promotion in CME modules if independence boundary blurs",
+    "Fair-balance gap on short-form EHR cards due to space constraints",
+    "Audience overbreadth: combined Neurology + IM + FM may be too wide for an education-led initiative"
+  ],
+  "recommended_path": "EHR-triggered point-of-care education as primary; on-demand CME as secondary"
+}

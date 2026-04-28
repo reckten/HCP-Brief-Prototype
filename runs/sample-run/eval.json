@@ -1,0 +1,13 @@
+{
+  "requirement_coverage": 0.84,
+  "targeting_clarity": 0.76,
+  "qa_completeness": 0.82,
+  "risk_detection": 0.81,
+  "documentation_quality": 0.85,
+  "overall_score": 0.82,
+  "overall_notes": "The run produces a coherent end-to-end artifact set with honest surfacing of ambiguities (audience overbreadth, frequency cap, CME independence, code mapping). Targeting clarity is the weakest dimension because the audience deliberately remains broad in the sample brief; the workflow correctly flags this rather than masking it. Test plan covers all 8 required categories with specific tests and machine-checkable criteria. Risk review surfaces real, non-generic flags. Documentation is readable by a non-technical stakeholder.",
+  "flags": [
+    "Targeting clarity below 0.80 reflects an unresolved audience overbreadth in the sample brief - the workflow surfaces it correctly but a human reviewer should confirm the proposed Phase 2 narrowing before launch.",
+    "Frequency cap and opt-out policy remain provisional; Phase 2 build should not start until brand team and Compliance approve."
+  ]
+}
