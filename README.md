@@ -2,8 +2,6 @@
 
 A 6-stage agentic pipeline that reads a structured HCP engagement brief in markdown and produces a complete, traceable, compliance-reviewed delivery package — requirements, execution plan, delivery handoff, QA test plan, risk review, and a calibrated evaluation score.
 
-Built as an interview prototype for the Associate Agentic Engineer role at Relevate Health.
-
 ---
 
 ## Screenshots
