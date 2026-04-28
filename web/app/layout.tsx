@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Nunito, Inter } from "next/font/google";
+import { Josefin_Sans } from "next/font/google";
 import "./globals.css";
 
-const nunito = Nunito({
+const josefin = Josefin_Sans({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800", "900"],
-  variable: "--font-nunito",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-inter",
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-josefin",
 });
 
 export const metadata: Metadata = {
@@ -26,12 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${nunito.variable} ${inter.variable}`}>
-      <body
-        style={{
-          fontFamily: "var(--font-inter), Helvetica, sans-serif",
-        }}
-      >
+    <html lang="en" className={josefin.variable}>
+      <body style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
         {children}
       </body>
     </html>

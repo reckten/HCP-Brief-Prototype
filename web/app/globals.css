@@ -13,15 +13,18 @@
   --light: #E8ECF2;
   --mid: #8A95A8;
   --dark: #1A2235;
+  --font-headline: var(--font-josefin), "Century Gothic", "Century Gothic Pro", Futura, "Trebuchet MS", sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body {
   background-color: var(--off);
   color: var(--dark);
+  font-family: var(--font-body);
 }
 
 .font-brand {
-  font-family: "Nunito", "Century Gothic", Futura, sans-serif;
+  font-family: var(--font-headline);
 }
 
 .stage-card-pending  { border-color: var(--light); }

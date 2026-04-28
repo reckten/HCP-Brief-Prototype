@@ -26,7 +26,7 @@ export default function ScoreRing({ score }: { score: number }) {
         textAnchor="middle"
         fontSize="26"
         fontWeight="800"
-        fontFamily="Nunito, sans-serif"
+        fontFamily="var(--font-josefin), Century Gothic, sans-serif"
         fill="#1A2235"
       >
         {pct}

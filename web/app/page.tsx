@@ -58,7 +58,7 @@ export default function HomePage() {
         </p>
         <h1
           className="text-4xl md:text-5xl font-black text-white leading-tight mb-4 max-w-2xl"
-          style={{ fontFamily: "var(--font-nunito), Century Gothic, sans-serif" }}
+          style={{ fontFamily: "var(--font-headline)" }}
         >
           One structured brief in.
           <br />Six agent stages.
@@ -73,7 +73,7 @@ export default function HomePage() {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block px-6 py-3 rounded font-bold text-sm border border-white/20 text-white/70 hover:text-white hover:border-white/40 transition-all"
-          style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+          style={{ fontFamily: "var(--font-headline)" }}
         >
           View on GitHub
         </a>
@@ -89,11 +89,11 @@ export default function HomePage() {
             <div key={s.num} className="rounded-lg p-4 border border-light" style={{ background: "var(--off)" }}>
               <div
                 className="w-8 h-8 rounded flex items-center justify-center text-white text-xs font-black mb-3"
-                style={{ background: "var(--ink)", fontFamily: "var(--font-nunito), sans-serif" }}
+                style={{ background: "var(--ink)", fontFamily: "var(--font-headline)" }}
               >
                 {s.num}
               </div>
-              <p className="font-bold text-sm text-dark mb-1" style={{ fontFamily: "var(--font-nunito), sans-serif" }}>
+              <p className="font-bold text-sm text-dark mb-1" style={{ fontFamily: "var(--font-headline)" }}>
                 {s.name}
               </p>
               <p className="text-xs" style={{ color: "var(--mid)" }}>→ {s.artifact}</p>
@@ -121,7 +121,7 @@ export default function HomePage() {
                 {/* Badge */}
                 <span
                   className="inline-block text-xs font-black tracking-widest px-2 py-1 rounded mb-4"
-                  style={{ color: b.badgeColor, background: b.badgeBg, fontFamily: "var(--font-nunito), sans-serif" }}
+                  style={{ color: b.badgeColor, background: b.badgeBg, fontFamily: "var(--font-headline)" }}
                 >
                   {b.badge}
                 </span>
@@ -129,7 +129,7 @@ export default function HomePage() {
                 {/* Brand + drug */}
                 <h2
                   className="text-xl font-black mb-0.5"
-                  style={{ color: "var(--ink)", fontFamily: "var(--font-nunito), sans-serif" }}
+                  style={{ color: "var(--ink)", fontFamily: "var(--font-headline)" }}
                 >
                   {b.brand}
                 </h2>
@@ -177,7 +177,7 @@ export default function HomePage() {
                 <Link
                   href={`/run?brief=${b.id}`}
                   className="block w-full text-center py-3 rounded font-bold text-sm text-white transition-opacity hover:opacity-90"
-                  style={{ background: b.badgeColor, fontFamily: "var(--font-nunito), sans-serif" }}
+                  style={{ background: b.badgeColor, fontFamily: "var(--font-headline)" }}
                 >
                   Run {b.brand} Pipeline →
                 </Link>
@@ -189,7 +189,7 @@ export default function HomePage() {
 
       <footer className="px-10 py-6 border-t border-light flex items-center gap-2">
         <div className="w-2 h-2 rounded-full" style={{ background: "var(--orange)" }} />
-        <span className="text-xs font-bold" style={{ color: "var(--ink)", fontFamily: "var(--font-nunito), sans-serif" }}>
+        <span className="text-xs font-bold" style={{ color: "var(--ink)", fontFamily: "var(--font-headline)" }}>
           Relevate Health
         </span>
         <span className="text-xs ml-2" style={{ color: "var(--mid)" }}>· Interview prototype · Fictional data only</span>

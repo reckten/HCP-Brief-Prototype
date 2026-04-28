@@ -137,7 +137,7 @@ export default function RunClient() {
         <p className="text-xs font-semibold tracking-widest mb-3" style={{ color: "var(--orange)" }}>
           HCP ENGAGEMENT BRIEF — PIPELINE OUTPUT
         </p>
-        <h2 className="text-2xl font-black text-white max-w-2xl leading-snug" style={{ fontFamily: "var(--font-nunito), Century Gothic, sans-serif" }}>
+        <h2 className="text-2xl font-black text-white max-w-2xl leading-snug" style={{ fontFamily: "var(--font-headline)" }}>
           {meta.title}
         </h2>
         <p className="text-white/50 text-sm mt-2">{meta.subtitle}</p>
@@ -201,7 +201,7 @@ export default function RunClient() {
 
             {/* Pipeline insight */}
             <div className="mb-6 p-4 rounded-lg border-l-4" style={{ borderColor: meta.insightColor, background: "white" }}>
-              <p className="text-xs font-black tracking-widest mb-1" style={{ color: meta.insightColor, fontFamily: "var(--font-nunito), sans-serif" }}>
+              <p className="text-xs font-black tracking-widest mb-1" style={{ color: meta.insightColor, fontFamily: "var(--font-headline)" }}>
                 PIPELINE INSIGHT
               </p>
               <p className="text-sm leading-relaxed" style={{ color: "var(--dark)" }}>{meta.insight}</p>
@@ -242,7 +242,7 @@ export default function RunClient() {
                     onClick={() => setActiveTab(tab.id)}
                     className="px-4 py-2 text-sm font-bold transition-all border-b-2 -mb-px"
                     style={{
-                      fontFamily: "var(--font-nunito), sans-serif",
+                      fontFamily: "var(--font-headline)",
                       borderColor: activeTab === tab.id ? "var(--ink)" : "transparent",
                       color: activeTab === tab.id ? "var(--ink)" : "var(--mid)",
                     }}
@@ -265,7 +265,7 @@ export default function RunClient() {
 
       <footer className="px-10 py-6 border-t border-light flex items-center gap-2">
         <div className="w-2 h-2 rounded-full" style={{ background: "var(--orange)" }} />
-        <span className="text-xs font-bold" style={{ color: "var(--ink)", fontFamily: "var(--font-nunito), sans-serif" }}>Relevate Health</span>
+        <span className="text-xs font-bold" style={{ color: "var(--ink)", fontFamily: "var(--font-headline)" }}>Relevate Health</span>
         <span className="text-xs ml-2" style={{ color: "var(--mid)" }}>· Interview prototype · Fictional data only</span>
       </footer>
     </>
@@ -280,12 +280,12 @@ function StageCard({ stage }: { stage: StageState }) {
 
   return (
     <div className="flex items-start gap-4 p-4 rounded-lg border bg-white transition-all" style={{ borderColor }}>
-      <div className="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center text-xs font-black transition-all" style={{ background: numBg, color: numColor, fontFamily: "var(--font-nunito), sans-serif" }}>
+      <div className="w-8 h-8 rounded flex-shrink-0 flex items-center justify-center text-xs font-black transition-all" style={{ background: numBg, color: numColor, fontFamily: "var(--font-headline)" }}>
         {stage.status === "running" ? <span className="pulse-olive">▶</span> : stage.status === "success" ? "✓" : String(stageNum).padStart(2, "0")}
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
-          <p className="font-bold text-sm" style={{ fontFamily: "var(--font-nunito), sans-serif", color: "var(--dark)" }}>{stage.label}</p>
+          <p className="font-bold text-sm" style={{ fontFamily: "var(--font-headline)", color: "var(--dark)" }}>{stage.label}</p>
           {stage.status === "running" && <span className="text-xs pulse-olive" style={{ color: "var(--olive)" }}>running…</span>}
           {stage.duration_ms && <span className="text-xs ml-auto flex-shrink-0" style={{ color: "var(--mid)" }}>{(stage.duration_ms / 1000).toFixed(1)}s</span>}
         </div>
@@ -298,7 +298,7 @@ function StageCard({ stage }: { stage: StageState }) {
 function StatCard({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className="px-5 py-4 rounded-lg border text-center" style={{ background: "white", borderColor: accent ? "var(--orange)" : "var(--light)" }}>
-      <p className="text-2xl font-black" style={{ color: accent ? "var(--orange)" : "var(--ink)", fontFamily: "var(--font-nunito), sans-serif" }}>{value}</p>
+      <p className="text-2xl font-black" style={{ color: accent ? "var(--orange)" : "var(--ink)", fontFamily: "var(--font-headline)" }}>{value}</p>
       <p className="text-xs mt-0.5" style={{ color: "var(--mid)" }}>{label}</p>
     </div>
   );
