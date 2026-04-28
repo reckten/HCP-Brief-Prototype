@@ -1,5 +1,7 @@
 # HCP Brief Workflow Demo
 
+**🔗 Live demo: [hcp-brief-demo.vercel.app](https://hcp-brief-demo.vercel.app)**
+
 A 6-stage agentic pipeline that reads a structured HCP engagement brief in markdown and produces a complete, traceable, compliance-reviewed delivery package — requirements, execution plan, delivery handoff, QA test plan, risk review, and a calibrated evaluation score.
 
 ---
