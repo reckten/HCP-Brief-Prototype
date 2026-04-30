@@ -183,6 +183,30 @@ The included brief (`briefs/sample-brief.md`) simulates a real HCP engagement in
 
 ---
 
+## Path to Production
+
+This prototype covers the shape of the problem. Here is what would need to change to run it for real.
+
+**Structured Outputs**
+During development, JSON is extracted from the model's free form text using regex. It works for a prototype but in production you want a guarantee, not a best effort. Any unexpected formatting or extra commentary from the model can break the parser. The production fix is the API's tool use system (function calling). The model is required to return data matching a predefined schema, so the output is guaranteed to be structured rather than parsed out of raw text.
+
+**Human Review Checkpoint**
+The pipeline currently runs straight through without interruption. In a real MLR workflow, any compliance flag above a defined severity threshold would halt execution and require a human reviewer to approve or reject before the pipeline continues downstream.
+
+**Resumable Runs**
+Right now, if stage 5 fails, the entire 6 stage pipeline must be re-executed from the beginning. A production system would persist intermediate artifacts so the workflow can resume from the last successful stage, avoiding unnecessary recomputation and cost.
+
+**Calibrated Evaluation**
+The evaluator currently scores outputs based solely on its own judgment, without any external reference. In a production setup, you would introduce a feedback loop where human reviewers score the same outputs. Over time, you compare human scores against agent scores and trigger alerts when the gap drifts beyond an acceptable threshold.
+
+**Real HCP Data**
+The audience estimates in this prototype are illustrative placeholders. In a production environment integrated with Relevate's Omni Know-How platform, these would be replaced with actual HCP targeting data including real audience counts, behavioral signals, prescribing patterns, and suppression list enforcement sourced directly from their proprietary dataset.
+
+**Audit Trail**
+Every artifact in the workflow needs a versioned, tamper-evident record to support regulatory review. The current trace.json provides a minimal outline of this, but it isn't sufficient for production-level auditability.
+
+---
+
 ## Disclaimer
 
 Fictional prototype for interview demonstration purposes only. Not legal, regulatory, or clinical advice. Does not reflect any internal Relevate Health system or workflow. No real PHI, no real HCP data, no real brand assets.
