@@ -208,12 +208,20 @@ export default function RunClient() {
             </div>
 
             {/* Audience + channels */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="mb-2">
+              <p className="text-xs font-bold tracking-widest" style={{ color: "var(--mid)" }}>AUDIENCE TARGETING</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
               <InfoCard label="Specialty">{results.requirements.audience.specialty.join(" · ")}</InfoCard>
               <InfoCard label="Geography">{results.requirements.audience.geography.join(", ")}</InfoCard>
               <InfoCard label="Care Setting">{results.requirements.audience.care_setting.join(" · ")}</InfoCard>
               <InfoCard label="Channels">{results.requirements.channels.join(" · ")}</InfoCard>
             </div>
+            <p className="text-xs mb-6" style={{ color: "var(--mid)" }}>
+              In production, audience data sourced via Relevate Health&apos;s{" "}
+              <a href="https://www.relevatehealth.com/omnichannel" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-75">Omni Know-How</a>{" "}
+              platform.
+            </p>
 
             {/* Flags */}
             {results.eval.flags.length > 0 && (
