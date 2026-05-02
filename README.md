@@ -191,7 +191,7 @@ This prototype covers the shape of the problem. Here is what would need to chang
 During development, JSON is extracted from the model's free form text using regex. It works for a prototype but in production you want a guarantee, not a best effort. Any unexpected formatting or extra commentary from the model can break the parser. The production fix is the API's tool use system (function calling). The model is required to return data matching a predefined schema, so the output is guaranteed to be structured rather than parsed out of raw text.
 
 **Human Review Checkpoint**
-The pipeline currently runs straight through without interruption. In a real MLR workflow, any compliance flag above a defined severity threshold would halt execution and require a human reviewer to approve or reject before the pipeline continues downstream.
+The pipeline currently runs straight through without interruption. In a real MLR workflow, any compliance flag above a defined severity threshold would halt execution and require a human reviewer to approve or reject before the pipeline continues downstream. This is where a framework like LangGraph becomes the right call. It has built-in interrupt nodes designed for exactly this pattern, along with native state persistence so a paused run can resume without re-executing completed stages.
 
 **Resumable Runs**
 Right now, if stage 5 fails, the entire 6 stage pipeline must be re-executed from the beginning. A production system would persist intermediate artifacts so the workflow can resume from the last successful stage, avoiding unnecessary recomputation and cost.
